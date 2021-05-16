@@ -63,3 +63,15 @@ In Addition to this, we also feature a Web-UI that a homeless (if they get chanc
 ![gallery](https://user-images.githubusercontent.com/74996590/118410488-82989080-b644-11eb-8633-db701ed9d8df.jpg)
 
 
+## Installation
+Once git cloned, from root folder:
+* `cd backend`
+* `cd ccn_server`
+
+To simulate a decentralized network, simulate multiple nodes. Here, we are showing two nodes. To create more, just copy the `main.py` application and be sure to change the `localhost` address. In addition to running the blockchain network, we will also run the middleware layer.
+
+* `python main.py` --> defaults to localhost:5000 server
+* `python main2.py` --> defaults to localhost:5001 server
+* `middleware.py` --> defaults to localhost:6000 server
+
+From here, you can use Postman to make API requests and interact with the blockchain network.

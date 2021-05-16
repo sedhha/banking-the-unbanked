@@ -649,6 +649,15 @@ Make the Payment after second verification. In the first verification step, user
 
 **Response** :
 ```json
-
+{
+    "data": {
+        "amount": 3,
+        "reciever": "Spidey_2",
+        "sender": "Spidey",
+        "timestamp": 1621169726145
+    },
+    "error": true,
+    "msg": "Session Expired. Please Retry the payment."
+}
 ```
 
