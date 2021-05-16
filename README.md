@@ -10,7 +10,8 @@ YouTube Video on the project:
 We aim to build a Full Stack architecture that inputs the User Bio-Signature which includes digital fingerprint and Facial Recognition and use this data to generate a hash that acts as a bio-digital currency for the end user to facilitate all the banking services, starting with deposit and withdrawals using crypto.
 In addition to this, with the help of the platform we’re trying to build we also intend to track homeless people, their financial condition in a more accurate way (as we have all their bio-digital bank balance) and use this data to not just reach the NGOs but also facilitate middle class and upper-class people, who have the access to smartphone resources to be able to help them.
 
-![alt text](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/515/166/datas/original.jpg)
+![gallery-2](https://user-images.githubusercontent.com/74996590/118410485-7c0a1900-b644-11eb-950e-9c673195dc60.jpg)
+
 
 With our approach, the NGOs and the helpers will not just be able to target a community but a single individual as well and we believe that will help in having a better reach and traction over the poverty and homelessness.
 
@@ -59,5 +60,6 @@ Additionally, in case of an unfortunate incident where person may end up losing 
 
 In Addition to this, we also feature a Web-UI that a homeless (if they get chance) can use to check their balances and try to register for other services which is beyond the scope of this project at the moment.
 
-![alt text](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/515/167/datas/original.jpg![image](https://user-images.githubusercontent.com/74996590/118410448-541ab580-b644-11eb-9bb5-458406163796.png)
+![gallery](https://user-images.githubusercontent.com/74996590/118410488-82989080-b644-11eb-8633-db701ed9d8df.jpg)
+
 
