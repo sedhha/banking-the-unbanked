@@ -3,15 +3,19 @@
 Banking the Unbanked
 User Story Overview
 
-[![Video](https://i.imgur.com/LAq78Fs.png)](https://www.youtube.com/watch?v=fysaALvs85s)
+YouTube Video on the project:
+[![Video](blob:https://imgur.com/0bc55a76-b746-41b9-b629-ee41df33fc75)](https://www.youtube.com/watch?v=fysaALvs85s)
 
 
 We aim to build a Full Stack architecture that inputs the User Bio-Signature which includes digital fingerprint and Facial Recognition and use this data to generate a hash that acts as a bio-digital currency for the end user to facilitate all the banking services, starting with deposit and withdrawals using crypto.
 In addition to this, with the help of the platform we’re trying to build we also intend to track homeless people, their financial condition in a more accurate way (as we have all their bio-digital bank balance) and use this data to not just reach the NGOs but also facilitate middle class and upper-class people, who have the access to smartphone resources to be able to help them.
 
+![alt text](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/515/166/datas/original.jpg)
+
 With our approach, the NGOs and the helpers will not just be able to target a community but a single individual as well and we believe that will help in having a better reach and traction over the poverty and homelessness.
 
 ## Architecture Details
+
 
 Our Framework is a middleware (crypt-in) that has the access to what we call as CCN server. A CCN Server is nothing but a collection of three units: -
 - CCN Global Bank Account
@@ -54,3 +58,6 @@ Additionally, in case of an unfortunate incident where person may end up losing 
 
 
 In Addition to this, we also feature a Web-UI that a homeless (if they get chance) can use to check their balances and try to register for other services which is beyond the scope of this project at the moment.
+
+![alt text](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/515/167/datas/original.jpg![image](https://user-images.githubusercontent.com/74996590/118410448-541ab580-b644-11eb-9bb5-458406163796.png)
+
