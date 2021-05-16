@@ -1,5 +1,5 @@
-graphics
+/graphics
 scripts/banking-unbanked/node_modules
-scripts/secrets
-dummy
+/scripts/secrets
+/dummy
 /ccn_server
