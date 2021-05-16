@@ -6,7 +6,7 @@ User Story Overview
 We aim to build a Full Stack architecture that inputs the User Bio-Signature which includes digital fingerprint and Facial Recognition and use this data to generate a hash that acts as a bio-digital currency for the end user to facilitate all the banking services, starting with deposit and withdrawals using crypto.
 In addition to this, with the help of the platform we’re trying to build we also intend to track homeless people, their financial condition in a more accurate way (as we have all their bio-digital bank balance) and use this data to not just reach the NGOs but also facilitate middle class and upper-class people, who have the access to smartphone resources to be able to help them.
 
-With our approach, the NGOs and the helpers will not just be able to target a community but a single individual as well and we believe that will help in having a better reach and traction over the poverty and homelessness.
+With our approach, the NGOs (Non-Government Organization) and the helpers will not just be able to target a community but a single individual as well and we believe that will help in having a better reach and traction over the poverty and homelessness.
 
 ## Architecture Details
 
