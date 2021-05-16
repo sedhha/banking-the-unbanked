@@ -34,7 +34,7 @@ def sanitation_check(jsonRequest):
         response = {"error": True, "msg":"Invalid Body","errorCode": 400}
         jsonRequest = {}
     if "apiKey" not in jsonRequest or "chainName" not in jsonRequest:
-        response = {"error": True, "msg":"apiKey and chainName are must for request to procceed.","errorCode": 400}
+        return {"error": True, "msg":"apiKey and chainName are must for request to procceed.","errorCode": 400}
     if not authenticate_api(jsonRequest["apiKey"]):
         response = {"error": True, "msg":"Invalid API Key","errorCode": 401}
     else:
@@ -117,11 +117,39 @@ def add_wallet_coins_admin():
 
     return jsonify(result),200
 
+@app.route('/does-wallet-exist', methods = ['POST'])
+def doesWalletExist():
+    json=request.get_json()
+    sanitationResponse = sanitation_check(jsonRequest = json)
+
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"]
+
+    wallets_existing = json["wallets"]
+
+    for eachWallet in wallets_existing:
+        if eachWallet not in bcWallets.wallets:
+            return jsonify({"error":True,"msg":"Wallet Address doesn't exist."}),400
+
+    return jsonify({"error":False,"msg":"Wallet Exists. We can make the transfer."}),200
+
+@app.route('/get-central-wallet', methods = ['GET'])
+def getCentralWallet():
+    json=request.get_json()
+    sanitationResponse = sanitation_check(jsonRequest = json)
+
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"]
+
+    centralWallet,centralWalletAddress = bcWallets.getCentralWallet()
+
+    return jsonify({"error":False,"msg":"Success", "centralWallet": centralWallet,"address": centralWalletAddress}),200
     
 
 @app.route('/add_transaction', methods = ['POST'])
 def add_transactions():
     json=request.get_json()
+    print("Json = ",json)
 
     sanitationResponse = sanitation_check(jsonRequest = json)
     if sanitationResponse["error"]:
@@ -158,9 +186,11 @@ def replace_chain():
         return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
 
     blockchain = getChainByName(json["chainName"])
+    chainJson = {**cfg.WALLETS_REQUEST}
+    chainJson["chainName"] = json["chainName"]
 
 
-    is_chain_replaced = blockchain.replace_chain()
+    is_chain_replaced = blockchain.replace_chain(json =chainJson)
     if is_chain_replaced:
         response = {'message': 'Node has different chains so it was replaced by longest one.',
                     'new_chain':blockchain.chain}
@@ -193,6 +223,10 @@ def connect_node():
 # Running the app
 
 if __name__ == "__main__":
-
     app.run(host = '0.0.0.0', port = 5000,debug = True)
+
+
+# if __name__ == "__main__":
+#     app.config['SERVER_NAME'] = "127.0.0.1:5000"
+#     app.run(host = '127.0.0.1', port = 5000,debug = True)
 

@@ -8,6 +8,11 @@ def create_wallet():
     w = wallet.create_wallet(network="BTC", seed=seed, children=1)
     w["coin"] = "UCW"
     w["balance"] = 0
+    try:
+        w["wif"] = w["wif"].decode("utf-8")
+    except:
+        del(w["wif"])
+        pass
 
     #Add Wallet to DB as well
 
@@ -23,12 +28,19 @@ class Wallets:
     def __init__(self):
 
         self.wallets = {}
+        self.centralwalletResponse = self.addWalet()
+        self.centralWalletAddress = self.centralwalletResponse["address"]
+        self.centralWallet = self.centralwalletResponse["public"]
+
 
     def _setErrorMessage(self,msg):
         operation = {}
         operation["error"] = True
         operation["msg"] = msg
         return operation
+
+    def getCentralWallet(self):
+        return self.centralWallet,self.centralWalletAddress
 
     
     def addWalet(self):
@@ -53,7 +65,7 @@ class Wallets:
 
         self.wallets[wallet["address"]] = publicWallet
 
-        return {"error":False,"private":wallet,"public":publicWallet}
+        return {"error":False,"address": wallet["address"],"private":wallet,"public":publicWallet}
 
     
     def transfer_coins(self, fromWallet,toWallet,balanceTransfer):

@@ -70,12 +70,12 @@ class Blockchain:
         parsed_url=urlparse(address)
         print("Node Address = ",parsed_url)
         self.nodes.add(parsed_url.netloc)
-    def replace_chain(self):
+    def replace_chain(self,json):
         network=self.nodes
         longest_chain=None
         max_length=len(self.chain)
         for node in network:
-            response=requests.get(f'http://{node}/get_chain')
+            response=requests.get(f'http://{node}/get_chain',json = json)
             if response.status_code==200:
                 length = response.json()['length']
                 chain=response.json()['chain']
