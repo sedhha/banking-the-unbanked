@@ -2,4 +2,4 @@ graphics
 scripts/banking-unbanked/node_modules
 scripts/secrets
 dummy
-ccn_server
+/ccn_server
