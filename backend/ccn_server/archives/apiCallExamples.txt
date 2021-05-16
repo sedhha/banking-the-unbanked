@@ -1,0 +1,69 @@
+get_chain Exmaple:
+
+GET: localhost:5000/get_chain
+JSON: {
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet"
+
+}
+
+is_valid Example:
+
+GET: localhost:5000/is_valid
+JSON: {
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet"
+
+}
+
+
+add_Wallet Example:
+
+POST: localhost:5000/add_wallet
+{
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet"
+
+}
+
+
+add_WalletCoins_Admin Example:
+
+POST: localhost:5000/add_wallet_coins_admin
+{
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet",
+    "adminAPIKey": "l1sGuEEKtv7Rm9VakXhU7gyzlqXpR8Z2",
+    "publicAddress": "1CSgpbx6HtpsndgDwph7ABanW8Uu2EQpeP",
+    "newBalance": 20
+
+}
+add_Transaction Example:
+
+POST localhost:5000/add_transaction
+{
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet",
+    "sender":"1GjoCTNrozHbDTF14w8SzC6jPo85ri1Pdk",
+    "reciever":"169WKggG5aXkzrSPsb56ZadfPUYqULoApV",
+    "amount":5
+
+
+}
+
+Replace Chain Example:
+
+GET localhost:5001/replace_chain
+{
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet"
+}
+
+Connect other Blockchain Nodes
+POST localhost:5000/connect_node
+
+{
+    "apiKey":"tHHxAb2SMhXY0X4XqTGn",
+    "chainName":"wallet",
+    "nodes": ["http://localhost:5001","http://localhost:5000"]
+}

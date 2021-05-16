@@ -1,29 +1,58 @@
-from flask import Flask, jsonify,request
 from modules.blockchain import Blockchain
+from modules.walletOperations import Wallets
+from flask import Flask, jsonify,request
 from uuid import uuid4
+import config as cfg
 
 app = Flask(__name__)
 node_address = str(uuid4()).replace('-','')
-blockchain = Blockchain()
-@app.route('/mine_block', methods = ['GET'])
-def mine_block():
-    previous_block = blockchain.get_previous_block()
-    previous_proof = previous_block['proof']
-    proof = blockchain.proof_of_work(previous_proof)
-    previous_hash = blockchain.hash(previous_block)
-    blockchain.add_transaction(sender=node_address,reciever='Hadelin',amount=1)
-    block = blockchain.create_block(proof, previous_hash)
-    response = {'message': 'Congratulations, you just mined a block!',
-                'index': block['index'],
-                'timestamp': block['timestamp'],
-                'proof': block['proof'],
-                'previous_hash': block['previous_hash'],
-                'transactions':block['transactions']}
-    return jsonify(response), 200
+# blockchain = Blockchain()
+central_BC_transaction = Blockchain()
+wallet_transaction = Blockchain()
+wallet_Data = Blockchain()
+bcWallets = Wallets()
 
-# Getting the full Blockchain
+def getChainByName(chainName):
+
+    if chainName == "central":
+        return central_BC_transaction
+
+    elif chainName == "wallet":
+        return wallet_transaction
+
+    else:
+        return wallet_Data
+
+def authenticate_api(apiKey):
+    if apiKey != cfg.API_KEY:
+        return False
+    return True
+
+def sanitation_check(jsonRequest):
+
+    if jsonRequest is None:
+        response = {"error": True, "msg":"Invalid Body","errorCode": 400}
+    if "apiKey" not in jsonRequest or "chainName" not in jsonRequest:
+        response = {"error": True, "msg":"apiKey and chainName are must for request to procceed.","errorCode": 400}
+    if not authenticate_api(jsonRequest["apiKey"]):
+        response = {"error": True, "msg":"Invalid API Key","errorCode": 401}
+    else:
+        response = {"error": False, "msg":"Invalid API Key","errorCode": 200}
+
+    return response
+
+
+
 @app.route('/get_chain', methods = ['GET'])
 def get_chain():
+    jsonRequest = request.get_json()
+
+    sanitationResponse = sanitation_check(jsonRequest = jsonRequest)
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
+
+    blockchain = getChainByName(jsonRequest["chainName"])
+
     response = {'chain': blockchain.chain,
                 'length': len(blockchain.chain)}
     return jsonify(response), 200
@@ -31,23 +60,105 @@ def get_chain():
 # Checking if the Blockchain is valid
 @app.route('/is_valid', methods = ['GET'])
 def is_valid():
+    jsonRequest = request.get_json()
+
+    sanitationResponse = sanitation_check(jsonRequest = jsonRequest)
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
+
+    blockchain = getChainByName(jsonRequest["chainName"])
+
+
     is_valid = blockchain.is_chain_valid(blockchain.chain)
     if is_valid:
-        response = {'message': 'All good. The Blockchain is valid.'}
+        response = {'message': True}
     else:
-        response = {'message': 'Houston, we have a problem. The Blockchain is not valid.'}
+        response = {'message': False}
     return jsonify(response), 200
+
+@app.route('/add_wallet', methods = ['POST'])
+def add_wallet():
+    json=request.get_json()
+
+    sanitationResponse = sanitation_check(jsonRequest = json)
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
+
+    result = bcWallets.addWalet()
+
+    if result["error"] == True:
+        return jsonify(result),400
+
+    return jsonify(result),201
+
+@app.route('/add_wallet_coins_admin', methods = ['POST'])
+def add_wallet_coins_admin():
+    json=request.get_json()
+
+    sanitationResponse = sanitation_check(jsonRequest = json)
+
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"]
+
+    if "adminAPIKey" not in json:
+        return jsonify({"error":True,"msg":"Admin API Key not available"}),401
+    
+    if json["adminAPIKey"] != cfg.ADMIN_API_KEY:
+        return jsonify({"error":True,"msg":"Admin API Key is not valid."}),401
+
+    if json["publicAddress"] not in bcWallets.wallets:
+        return jsonify({"error":True,"msg":"Wallet Address doesn't exist."}),400
+
+    result = bcWallets.updateWalletBalance(address=json["publicAddress"],newBalance=json["newBalance"])
+
+    if result["error"]:
+        return jsonify(result),400
+
+    return jsonify(result),200
+
+    
+
 @app.route('/add_transaction', methods = ['POST'])
 def add_transactions():
     json=request.get_json()
-    transaction_keys=['sender','reciever','amount']
+
+    sanitationResponse = sanitation_check(jsonRequest = json)
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
+
+    blockchain = wallet_transaction
+
+    transaction_keys=['sender','reciever','amount'] #Wallet Address
     if not all (key in json for key in transaction_keys):
         return 'Some elements of transaction are missing',400
-    index=blockchain.add_transaction(json['sender'],json['reciever'],json['amount'])
-    response={'message':f'This transaction will be added to Block. {index}'}
-    return jsonify(response),201
+
+    result = bcWallets.transfer_coins(fromWallet=json["sender"],toWallet=json["reciever"],balanceTransfer=json["amount"])
+
+    if result["error"]:
+        return result["msg"],400
+
+    previous_block = blockchain.get_previous_block()
+    previous_proof = previous_block['proof']
+    proof = blockchain.proof_of_work(previous_proof)
+    previous_hash = blockchain.hash(previous_block)
+    blockchain.create_block(proof, previous_hash,data=result["operation"])
+
+    if not result["operation"]["success"]:
+        return jsonify({"error":True,"msg": result["operation"]["msg"]}),400
+
+    return jsonify({"error":False,"msg":"Transaction Success."}),201
+
 @app.route('/replace_chain', methods = ['GET'])
 def replace_chain():
+    json=request.get_json()
+
+    sanitationResponse = sanitation_check(jsonRequest = json)
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
+
+    blockchain = getChainByName(json["chainName"])
+
+
     is_chain_replaced = blockchain.replace_chain()
     if is_chain_replaced:
         response = {'message': 'Node has different chains so it was replaced by longest one.',
@@ -56,14 +167,17 @@ def replace_chain():
         response = {'message':'All good. The chain is largest one.',
                     'actual_chain':blockchain.chain}
     return jsonify(response), 200
+
 @app.route('/connect_node',methods=['POST'])
 def connect_node():
-    '''
-    {
-    "nodes": ["http://localhost:5001"]
-    }
-    '''
     json=request.get_json()
+    sanitationResponse = sanitation_check(jsonRequest = json)
+    if sanitationResponse["error"]:
+        return jsonify(sanitationResponse), sanitationResponse["errorCode"] 
+
+    blockchain = getChainByName(json["chainName"])
+
+
     nodes=json.get('nodes')
     if nodes is None:
         return 'No node',400
@@ -76,4 +190,8 @@ def connect_node():
 
 
 # Running the app
-app.run(host = '0.0.0.0', port = 5001)
+
+if __name__ == "__main__":
+
+    app.run(host = '0.0.0.0', port = 5001,debug = True)
+
