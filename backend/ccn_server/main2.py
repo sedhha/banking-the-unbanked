@@ -34,7 +34,7 @@ def sanitation_check(jsonRequest):
         response = {"error": True, "msg":"Invalid Body","errorCode": 400}
         jsonRequest = {}
     if "apiKey" not in jsonRequest or "chainName" not in jsonRequest:
-        response = {"error": True, "msg":"apiKey and chainName are must for request to procceed.","errorCode": 400}
+        return {"error": True, "msg":"apiKey and chainName are must for request to procceed.","errorCode": 400}
     if not authenticate_api(jsonRequest["apiKey"]):
         response = {"error": True, "msg":"Invalid API Key","errorCode": 401}
     else:
@@ -149,6 +149,7 @@ def getCentralWallet():
 @app.route('/add_transaction', methods = ['POST'])
 def add_transactions():
     json=request.get_json()
+    print("Json = ",json)
 
     sanitationResponse = sanitation_check(jsonRequest = json)
     if sanitationResponse["error"]:
