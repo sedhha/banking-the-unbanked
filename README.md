@@ -3,7 +3,8 @@
 Banking the Unbanked
 User Story Overview
 
-https://www.youtube.com/watch?v=fysaALvs85s
+[![Video](https://i.imgur.com/LAq78Fs.png)](https://www.youtube.com/watch?v=fysaALvs85s)
+
 
 We aim to build a Full Stack architecture that inputs the User Bio-Signature which includes digital fingerprint and Facial Recognition and use this data to generate a hash that acts as a bio-digital currency for the end user to facilitate all the banking services, starting with deposit and withdrawals using crypto.
 In addition to this, with the help of the platform we’re trying to build we also intend to track homeless people, their financial condition in a more accurate way (as we have all their bio-digital bank balance) and use this data to not just reach the NGOs but also facilitate middle class and upper-class people, who have the access to smartphone resources to be able to help them.
