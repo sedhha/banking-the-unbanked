@@ -17,7 +17,7 @@ def mine_block():
     previous_proof = previous_block['proof']
     proof = blockchain.proof_of_work(previous_proof)
     previous_hash = blockchain.hash(previous_block)
-    blockchain.add_transaction(sender=node_address,reciever='Hadelin',amount=1)
+    blockchain.add_transaction(sender=node_address,reciever='Shivam',amount=1)
     block = blockchain.create_block(proof, previous_hash)
     response = {'message': 'Congratulations, you just mined a block!',
                 'index': block['index'],
@@ -64,7 +64,7 @@ def replace_chain():
         response = {'message':'All good. The chain is largest one.',
                     'actual_chain':blockchain.chain}
     return jsonify(response), 200
-    
+
 @app.route('/connect_node',methods=['POST'])
 def connect_node():
     json=request.get_json()
