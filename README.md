@@ -1,4 +1,4 @@
-# banking-the-unbanked
+# Banking the Unbanked
 
 Banking the Unbanked
 User Story Overview
