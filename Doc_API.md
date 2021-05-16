@@ -8,22 +8,12 @@ Get the details of a Blockchain Network by name.
 
 **Method** : `GET`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
-Get the details of the Wallet Based Transaction Blockchain.
 
 ```json
 {
     "apiKey":"tHHxAb2SMhXY0X4XqTGn",
     "chainName":"wallet"
-
 }
 ```
 
@@ -52,22 +42,12 @@ Validate blockchain by verifying hash signature of previous block.
 
 **Method** : `GET`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
-Verify Wallet Based Transaction Blockchain.
 
 ```json
 {
     "apiKey":"tHHxAb2SMhXY0X4XqTGn",
     "chainName":"wallet"
-
 }
 ```
 
@@ -86,22 +66,12 @@ Add a wallet to the `Wallet` database.
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
-
 **Request** : 
-Add a wallet to the `Wallet` database.
 
 ```json
 {
     "apiKey":"tHHxAb2SMhXY0X4XqTGn",
     "chainName":"wallet"
-
 }
 ```
 
@@ -147,14 +117,6 @@ Admin adds coins to user wallet.
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
 Admin adds 20 `UCW` coins to a user. Use case example: NGO depositing funds to a user.
 
@@ -165,7 +127,6 @@ Admin adds 20 `UCW` coins to a user. Use case example: NGO depositing funds to a
     "adminAPIKey": "l1sGuEEKtv7Rm9VakXhU7gyzlqXpR8Z2",
     "publicAddress": "1BFggXrXa27kSC1mfVa1SCQSUbd71BjCka",
     "newBalance": 20
-
 }
 ```
 
@@ -193,14 +154,6 @@ Transfer coins between wallets via a public address.
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
-
 **Request** : 
 Transfer coins between two users.
 
@@ -211,8 +164,6 @@ Transfer coins between two users.
     "sender":"1BFggXrXa27kSC1mfVa1SCQSUbd71BjCka",
     "reciever":"19XhgCCAr3GkcevqGgAbFygUKkg6nTjqKp",
     "amount":5
-
-
 }
 ```
 
@@ -232,16 +183,7 @@ If running multiple nodes, keep the blockchain with the largest chain. Get detai
 
 **Method** : `GET`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
-Keep the largest blockchain that is running on network nodes.
 
 ```json
 {
@@ -283,22 +225,13 @@ Keep the largest blockchain that is running on network nodes.
 
 ## Connect Node
 
-Connect additional nodes for decentralized.
+Connect additional nodes for decentralized network.
 
 **URL** : `/connect_node`
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
-
 **Request** : 
-Connect nodes to the blockchain network.
 
 ```json
 {
@@ -327,14 +260,6 @@ Check if wallet exists in database.
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
 
 ```json
@@ -361,21 +286,12 @@ Get central wallet that is connected to CCN server.
 
 **Method** : `GET`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
 
 ```json
 {
     "apiKey":"tHHxAb2SMhXY0X4XqTGn",
     "chainName":"wallet"
-
 }
 ```
 
@@ -403,14 +319,6 @@ Register User.
 **URL** : `localhost:6000/register_user`
 
 **Method** : `POST`
-
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
 
 **Request** : 
 
@@ -442,14 +350,6 @@ Get transaction history from biometric data.
 **URL** : `localhost:6000/get_transaction_history`
 
 **Method** : `GET`
-
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
 
 **Request** : 
 
@@ -565,14 +465,6 @@ Add wallet coins via administrator account.
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
-
 **Request** : 
 
 ```json
@@ -597,14 +489,6 @@ Get admin based transactions.
 **URL** : `localhost:6000/admin_ops`
 
 **Method** : `GET`
-
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
 
 **Request** : 
 
@@ -651,14 +535,6 @@ Check if wallet exists in database by pinging to CCN server (note that here both
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
-
 **Request** : 
 
 ```json
@@ -685,14 +561,6 @@ Get central wallet address from CCN server.
 **URL** : `localhost:6000/get-central-wallet`
 
 **Method** : `GET`
-
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `200`
 
 **Request** : 
 
@@ -728,14 +596,6 @@ First step requires facial and biometric data.
 
 **Method** : `POST`
 
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
-
 **Request** : 
 
 ```json
@@ -767,14 +627,6 @@ Make the Payment after second verification. In the first verification step, user
 **URL** : `localhost:6000/add_transaction`
 
 **Method** : `POST`
-
-<!-- **Auth required** : YES -->
-
-<!-- **Permissions required** : None -->
-
-### Success Response
-
-**Code** : `201`
 
 **Request** : 
 
