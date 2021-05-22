@@ -3,8 +3,10 @@
 Banking the Unbanked
 User Story Overview
 
-YouTube Video on the project:
-[![Video](blob:https://imgur.com/0bc55a76-b746-41b9-b629-ee41df33fc75)](https://www.youtube.com/watch?v=fysaALvs85s)
+YouTube Video of the project:
+
+[![Youtube Video](https://img.youtube.com/vi/fysaALvs85s/0.jpg)](https://www.youtube.com/watch?v=fysaALvs85s)
+
 
 
 We aim to build a Full Stack architecture that inputs the User Bio-Signature which includes digital fingerprint and Facial Recognition and use this data to generate a hash that acts as a bio-digital currency for the end user to facilitate all the banking services, starting with deposit and withdrawals using crypto.
